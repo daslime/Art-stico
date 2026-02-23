@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Arti'stico Finishes & Interior Design Company Limited — Where luxury meets craftsmanship. Explore our world of exquisite interiors." />
+  <title>ARTI'STICO | Finishes &amp; Interior Design</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Jost:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      /* ── Brand purples (from logo) ── */
+      --purple-deep:  #2D0558;
+      --purple:       #3B0764;
+      --purple-mid:   #4E0F82;
+      --purple-light: #6A1FAA;
+      --purple-glass: rgba(59, 7, 100, 0.55);
+      /* ── Logo gold tones ── */
+      --gold:         #F5A623;
+      --gold-light:   #FFD080;
+      --gold-dim:     #C4820F;
+      --gold-pale:    rgba(245,166,35,0.15);
+      /* ── On-dark text ── */
+      --white:        #FFFFFF;
+      --text-body:    rgba(255,255,255,0.92);
+      --text-muted:   rgba(255,255,255,0.5);
+      --text-faint:   rgba(255,255,255,0.25);
+      /* ── Card surfaces ── */
+      --card-bg:      rgba(255,255,255,0.055);
+      --card-border:  rgba(255,255,255,0.09);
+      --card-hover-bg:rgba(255,255,255,0.10);
+      --card-hover-bd:rgba(245,166,35,0.38);
+      --icon-bg:      rgba(255,255,255,0.07);
+      --shadow-warm:  rgba(0,0,0,0.35);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      min-height: 100vh;
+      font-family: 'Jost', sans-serif;
+      background-color: var(--purple);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      overflow-x: hidden;
+      padding: 0 0 80px 0;
+    }
+
+    /* ── Purple Brand Background ── */
+    .bg-canvas {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+      background: var(--purple-deep);
+    }
+
+    /* Depth gradient — blends purple with logo gold warmth */
+    .bg-canvas::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 55% at 15% 0%,   rgba(110,31,180,0.55) 0%, transparent 60%),
+        radial-gradient(ellipse 65% 50% at 85% 100%,  rgba(45,5,90,0.9) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 40% at 70% 20%,  rgba(245,166,35,0.07) 0%, transparent 55%),
+        radial-gradient(ellipse 40% 35% at 30% 80%,  rgba(245,166,35,0.05) 0%, transparent 50%),
+        linear-gradient(160deg, #2D0558 0%, #3B0764 45%, #2D0558 100%);
+    }
+
+    /* Subtle diagonal pattern — like woven silk ── */
+    .bg-canvas::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        repeating-linear-gradient(
+          110deg,
+          transparent 0px,
+          transparent 140px,
+          rgba(245,166,35,0.03) 141px,
+          rgba(245,166,35,0.03) 142px
+        ),
+        repeating-linear-gradient(
+          70deg,
+          transparent 0px,
+          transparent 200px,
+          rgba(255,255,255,0.015) 201px,
+          rgba(255,255,255,0.015) 202px
+        );
+      pointer-events: none;
+    }
+
+    .grain {
+      position: fixed;
+      inset: -50%;
+      width: 200%; height: 200%;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.4;
+      mix-blend-mode: screen;
+    }
+
+    /* ── Decorative arch top border ── */
+    .arch-top {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, var(--purple-mid) 0%, var(--gold-dim) 25%, var(--gold) 50%, var(--gold-dim) 75%, var(--purple-mid) 100%);
+      z-index: 100;
+    }
+
+    /* ── Page ── */
+    .page {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      max-width: 540px;
+      margin: 0 auto;
+      padding: 64px 24px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+
+    /* ── Collection Tag (breadcrumb style) ── */
+    .collection-tag {
+      font-family: 'Jost', sans-serif;
+      font-size: 0.6rem;
+      letter-spacing: 0.38em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 500;
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      animation: fadeDown 0.7s ease both;
+    }
+    .collection-tag::before,
+    .collection-tag::after {
+      content: '';
+      width: 28px;
+      height: 1px;
+      background: var(--gold);
+      opacity: 0.6;
+    }
+
+    /* ── Logo ── */
+    .logo-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 32px;
+      animation: fadeDown 0.9s cubic-bezier(.22,1,.36,1) both;
+    }
+
+    /* Arch frame — dark polished purple stone */
+    .logo-arch-frame {
+      position: relative;
+      width: 152px;
+      height: 172px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Stone body — glossy dark purple marble */
+    .logo-arch-frame::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 76px 76px 14px 14px;
+      background:
+        linear-gradient(160deg,
+          rgba(130, 60, 210, 0.5)  0%,
+          rgba(80,  10, 140, 0.65) 25%,
+          rgba(59,   7, 100, 0.98) 55%,
+          rgba(59,   7, 100, 1)    80%,
+          rgba(40,   4,  72, 1)    100%
+        ),
+        /* marble veining */
+        repeating-linear-gradient(
+          118deg,
+          transparent 0px, transparent 22px,
+          rgba(180,130,255,0.07) 23px, rgba(180,130,255,0.07) 24px
+        ),
+        repeating-linear-gradient(
+          55deg,
+          transparent 0px, transparent 38px,
+          rgba(245,166,35,0.04)  39px, rgba(245,166,35,0.04)  40px
+        );
+      border: 1.5px solid rgba(245, 166, 35, 0.45);
+      box-shadow:
+        /* outer gold glow */
+        0 0 28px rgba(245, 166, 35, 0.18),
+        0 8px 40px rgba(0, 0, 0, 0.5),
+        /* top shine highlight */
+        0 -1px 0 rgba(180, 120, 255, 0.3) inset,
+        /* inner depth */
+        0 4px 20px rgba(0,0,0,0.5) inset;
+    }
+
+    /* Inner gold ornament border */
+    .logo-arch-frame::after {
+      content: '';
+      position: absolute;
+      inset: 8px;
+      border-radius: 70px 70px 9px 9px;
+      border: 1px solid rgba(245, 166, 35, 0.22);
+      /* top-left glossy sheen */
+      background: linear-gradient(
+        135deg,
+        rgba(200,160,255,0.07) 0%,
+        transparent            50%
+      );
+      pointer-events: none;
+    }
+
+    .logo-img-container {
+      position: relative;
+      width: 114px;
+      height: 114px;
+      border-radius: 50%;
+      overflow: hidden;
+      background: var(--purple);
+      border: 2.5px solid rgba(245, 166, 35, 0.5);
+      box-shadow:
+        0 0 0 5px rgba(59,7,100,0.95),
+        0 0 24px rgba(245,166,35,0.25),
+        inset 0 0 16px rgba(0,0,0,0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+      z-index: 1;
+    }
+
+    .logo-img-container img {
+      width: 100%; height: 100%;
+      object-fit: contain;
+    }
+
+    /* Gold wax-seal dot at base of arch */
+    .logo-seal {
+      position: absolute;
+      bottom: -9px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 38% 32%, var(--gold-light), var(--gold-dim));
+      border: 2px solid var(--purple-deep);
+      box-shadow: 0 0 12px rgba(245,166,35,0.6), 0 2px 6px rgba(0,0,0,0.5);
+      z-index: 3;
+    }
+
+    /* ── Identity ── */
+    .identity {
+      text-align: center;
+      margin-bottom: 6px;
+      margin-top: 16px;
+      animation: fadeUp 0.85s cubic-bezier(.22,1,.36,1) 0.2s both;
+    }
+
+    .company-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 8vw, 2.75rem);
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      color: var(--white);
+      line-height: 1.1;
+    }
+
+    .company-name span { color: var(--gold); }
+
+    /* ── Ornamental Divider ── */
+    .ornament-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin: 16px 0 14px;
+    }
+
+    .ornament-divider .line {
+      flex: 1;
+      max-width: 70px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(245,166,35,0.4));
+    }
+    .ornament-divider .line.right {
+      background: linear-gradient(to left, transparent, rgba(245,166,35,0.4));
+    }
+
+    .ornament-center {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      color: var(--gold);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+    }
+    .ornament-center svg {
+      width: 18px; height: 18px;
+      fill: var(--gold);
+      opacity: 0.75;
+    }
+
+    .tagline {
+      font-family: 'Jost', sans-serif;
+      font-size: clamp(0.58rem, 2.2vw, 0.68rem);
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+
+    .bio {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1rem, 3.2vw, 1.15rem);
+      font-style: italic;
+      color: var(--text-muted);
+      line-height: 1.65;
+      max-width: 360px;
+      margin: 0 auto 6px;
+      font-weight: 300;
+    }
+
+    /* ── Meta Pills ── */
+    .meta-pills {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      margin: 18px 0 36px;
+      animation: fadeUp 0.85s cubic-bezier(.22,1,.36,1) 0.32s both;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 7px 16px;
+      border-radius: 4px;
+      border: 1px solid rgba(245,166,35,0.25);
+      background: rgba(245,166,35,0.07);
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      font-weight: 500;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.2);
+    }
+    .pill svg {
+      width: 12px; height: 12px;
+      fill: var(--gold);
+      flex-shrink: 0;
+    }
+
+    /* ── Section Label ── */
+    .section-label {
+      font-size: 0.58rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 18px;
+      width: 100%;
+      font-family: 'Jost', sans-serif;
+    }
+
+    /* ── Linktree-style Link Buttons ── */
+    .links-stack {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .link-btn {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      width: 100%;
+      min-height: 62px;
+      border-radius: 16px;
+      text-decoration: none;
+      position: relative;
+      overflow: hidden;
+      background: rgba(255,255,255,0.09);
+      border: 1px solid rgba(255,255,255,0.12);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow:
+        0 4px 20px rgba(0,0,0,0.3),
+        0 1px 0 rgba(255,255,255,0.07) inset;
+      transition:
+        transform 0.22s cubic-bezier(.22,1,.36,1),
+        box-shadow 0.22s ease,
+        border-color 0.22s ease,
+        background 0.22s ease,
+        filter 0.22s ease;
+      cursor: pointer;
+    }
+
+    .link-btn:hover {
+      transform: translateY(-3px) scale(1.012);
+      background: rgba(255,255,255,0.14);
+      border-color: rgba(245,166,35,0.4);
+      box-shadow:
+        0 10px 36px rgba(0,0,0,0.45),
+        0 0 0 1.5px rgba(245,166,35,0.2),
+        0 1px 0 rgba(255,255,255,0.1) inset;
+      filter: brightness(1.06);
+    }
+
+    .link-btn:active {
+      transform: translateY(-1px) scale(1.004);
+      filter: brightness(0.97);
+    }
+
+    /* ── Platform-coloured icon side panel ── */
+    .btn-icon {
+      position: relative;
+      width: 62px;
+      min-height: 62px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 14px 0 0 14px;
+      transition: opacity 0.22s;
+    }
+    .link-btn:hover .btn-icon { opacity: 0.92; }
+    .btn-icon svg { width: 28px; height: 28px; }
+
+    /* Each platform gets its own brand colour panel */
+    .btn-linkedin  .btn-icon { background: #0077B5; }
+    .btn-tiktok    .btn-icon { background: #010101; }
+    .btn-youtube   .btn-icon { background: #FF0000; }
+    .btn-instagram .btn-icon {
+      background: radial-gradient(circle at 30% 110%,
+        #f9ed32 0%, #ee2a7b 40%, #002aff 80%);
+    }
+    .btn-whatsapp  .btn-icon { background: #25D366; }
+
+    /* Remove the old platform dot — no longer needed */
+    .btn-icon::after { display: none; }
+
+    /* ── Thin separator line between icon and text ── */
+    .btn-icon::before {
+      content: '';
+      position: absolute;
+      right: 0; top: 20%; bottom: 20%;
+      width: 1px;
+      background: rgba(255,255,255,0.15);
+    }
+
+    /* ── Text block — centered in remaining space ── */
+    .btn-text {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      padding: 14px 12px;
+    }
+
+    .btn-label {
+      display: none; /* hidden — platform shown by icon colour */
+    }
+
+    .btn-name {
+      display: block;
+      font-family: 'Jost', sans-serif;
+      font-size: clamp(0.95rem, 3.5vw, 1.05rem);
+      font-weight: 600;
+      color: var(--white);
+      letter-spacing: 0.04em;
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      width: 100%;
+    }
+
+    .btn-handle {
+      display: block;
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.48);
+      letter-spacing: 0.03em;
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-family: 'Jost', sans-serif;
+      width: 100%;
+    }
+
+    /* ── Arrow ── */
+    .btn-arrow {
+      flex-shrink: 0;
+      width: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.28);
+      transition: color 0.22s, transform 0.22s;
+      padding-right: 4px;
+    }
+    .link-btn:hover .btn-arrow {
+      color: var(--gold);
+      transform: translateX(3px);
+    }
+    .btn-arrow svg { width: 16px; height: 16px; }
+
+    /* ── WhatsApp: no special override needed (green panel handles it) ── */
+    .btn-whatsapp-cta {
+      border-color: rgba(37,211,102,0.25);
+    }
+
+    /* ── Footer ── */
+    .footer {
+      margin-top: 48px;
+      text-align: center;
+      animation: fadeUp 0.85s cubic-bezier(.22,1,.36,1) 0.7s both;
+    }
+
+    .footer-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .footer-divider-line {
+      width: 50px; height: 1px;
+      background: linear-gradient(to right, transparent, rgba(245,166,35,0.35));
+    }
+    .footer-divider-line:last-child {
+      background: linear-gradient(to left, transparent, rgba(245,166,35,0.35));
+    }
+
+    .footer-gem {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .footer-gem span {
+      width: 5px; height: 5px;
+      background: var(--gold);
+      transform: rotate(45deg);
+      opacity: 0.7;
+      display: block;
+    }
+    .footer-gem span:first-child,
+    .footer-gem span:last-child {
+      width: 3px; height: 3px;
+      opacity: 0.4;
+    }
+
+    .footer-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.38);
+      letter-spacing: 0.04em;
+      margin-bottom: 14px;
+    }
+
+    .footer-copy {
+      font-size: 0.6rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      font-family: 'Jost', sans-serif;
+    }
+
+    /* ── Animations ── */
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 480px) {
+      .page { padding: 52px 16px 20px; }
+      .logo-arch-frame { width: 130px; height: 148px; }
+      .logo-img-container { width: 94px; height: 94px; }
+      .link-btn { padding: 14px 16px; gap: 13px; }
+      .btn-icon { width: 40px; height: 40px; }
+      .btn-icon svg { width: 22px; height: 22px; }
+    }
+
+    @media (max-width: 360px) {
+      .company-name { font-size: 1.75rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Gold top bar -->
+  <div class="arch-top"></div>
+
+  <!-- Textured Background -->
+  <div class="bg-canvas"></div>
+  <div class="grain"></div>
+
+  <main class="page">
+
+    <!-- Collection tag -->
+    <div class="collection-tag">Est. Interior &amp; Finishes</div>
+
+    <!-- Logo -->
+    <div class="logo-wrap">
+      <div class="logo-arch-frame">
+        <div class="logo-img-container">
+          <img src="Artistico_page-0001-Photoroom.png" alt="Arti'stico Logo" />
+        </div>
+        <div class="logo-seal"></div>
+      </div>
+    </div>
+
+    <!-- Identity -->
+    <div class="identity">
+      <h1 class="company-name">ARTI<span>'</span>STICO</h1>
+
+      <div class="ornament-divider">
+        <div class="line"></div>
+        <div class="ornament-center">
+          <!-- Leaf / fleur ornament -->
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2C12 2 6 7 6 13a6 6 0 0012 0C18 7 12 2 12 2Z"/>
+            <line x1="12" y1="22" x2="12" y2="13" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M12 16 C10 14 7 14 6 15" stroke="currentColor" stroke-width="1" fill="none"/>
+          </svg>
+        </div>
+        <div class="line right"></div>
+      </div>
+
+      <p class="tagline">Finishes &amp; Interior Design Company Limited</p>
+      <p class="bio">Where refined craftsmanship meets elevated living.<br>We curate spaces of timeless distinction.</p>
+    </div>
+
+    <!-- Meta Pills -->
+    <div class="meta-pills">
+      <span class="pill">
+        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        Shem Plaza, Off Lusaka Road, 1st Floor
+      </span>
+    </div>
+
+    <!-- Social Links -->
+    <p class="section-label">Connect with us</p>
+
+    <nav class="links-stack" aria-label="Social media links">
+
+      <!-- LinkedIn -->
+      <a href="https://www.linkedin.com/in/artistico-designs-8103103ab" target="_blank" rel="noopener noreferrer" class="link-btn btn-linkedin" id="linkedin-link">
+        <div class="btn-icon">
+          <svg viewBox="0 0 24 24" fill="none">
+            <rect width="24" height="24" rx="4" fill="#0077B5"/>
+            <path d="M7.5 9.5H5V19H7.5V9.5Z" fill="white"/>
+            <circle cx="6.25" cy="6.75" r="1.5" fill="white"/>
+            <path d="M19 19H16.5V14.25C16.5 13.15 15.6 12.25 14.5 12.25C13.4 12.25 12.5 13.15 12.5 14.25V19H10V9.5H12.5V10.87C13.15 9.91 14.23 9.25 15.5 9.25C17.43 9.25 19 10.82 19 12.75V19Z" fill="white"/>
+          </svg>
+        </div>
+        <div class="btn-text">
+          <span class="btn-label">LinkedIn</span>
+          <span class="btn-name">Arti'stico Designs</span>
+          <span class="btn-handle">@artistico-designs</span>
+        </div>
+        <span class="btn-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </span>
+      </a>
+
+      <!-- TikTok -->
+      <a href="https://www.tiktok.com/@artisticofinishes" target="_blank" rel="noopener noreferrer" class="link-btn btn-tiktok" id="tiktok-link">
+        <div class="btn-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.53V6.76a4.85 4.85 0 01-1.01-.07z" fill="white"/>
+            <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.53V6.76a4.85 4.85 0 01-1.01-.07z" fill="#69C9D0" opacity="0.6"/>
+          </svg>
+        </div>
+        <div class="btn-text">
+          <span class="btn-label">TikTok</span>
+          <span class="btn-name">Arti'stico Finishes</span>
+          <span class="btn-handle">@artisticofinishes</span>
+        </div>
+        <span class="btn-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </span>
+      </a>
+
+      <!-- YouTube -->
+      <a href="https://youtube.com/@artisticodesigns" target="_blank" rel="noopener noreferrer" class="link-btn btn-youtube" id="youtube-link">
+        <div class="btn-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M23.5 6.2a3.02 3.02 0 00-2.12-2.14C19.56 3.6 12 3.6 12 3.6s-7.56 0-9.38.46A3.02 3.02 0 00.5 6.2C.04 8.04.04 12 .04 12s0 3.96.46 5.8a3.02 3.02 0 002.12 2.14C4.44 20.4 12 20.4 12 20.4s7.56 0 9.38-.46a3.02 3.02 0 002.12-2.14C23.96 15.96 23.96 12 23.96 12s-.04-3.96-.46-5.8z" fill="#FF0000"/>
+            <path d="M9.75 15.5l6.25-3.5-6.25-3.5v7z" fill="white"/>
+          </svg>
+        </div>
+        <div class="btn-text">
+          <span class="btn-label">YouTube</span>
+          <span class="btn-name">Arti'stico Designs</span>
+          <span class="btn-handle">@artisticodesigns</span>
+        </div>
+        <span class="btn-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </span>
+      </a>
+
+      <!-- Instagram -->
+      <a href="https://www.instagram.com/artisticofinishes" target="_blank" rel="noopener noreferrer" class="link-btn btn-instagram" id="instagram-link">
+        <div class="btn-icon">
+          <svg viewBox="0 0 24 24">
+            <defs>
+              <radialGradient id="ig-gradient" cx="30%" cy="107%" r="150%">
+                <stop offset="0%"   stop-color="#fdf497"/>
+                <stop offset="5%"   stop-color="#fdf497"/>
+                <stop offset="45%"  stop-color="#fd5949"/>
+                <stop offset="60%"  stop-color="#d6249f"/>
+                <stop offset="90%"  stop-color="#285AEB"/>
+              </radialGradient>
+            </defs>
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="url(#ig-gradient)"/>
+            <circle cx="12" cy="12" r="4.5" fill="none" stroke="white" stroke-width="1.8"/>
+            <circle cx="17.5" cy="6.5" r="1.2" fill="white"/>
+          </svg>
+        </div>
+        <div class="btn-text">
+          <span class="btn-label">Instagram</span>
+          <span class="btn-name">Arti'stico Finishes</span>
+          <span class="btn-handle">@artisticofinishes</span>
+        </div>
+        <span class="btn-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </span>
+      </a>
+
+      <!-- WhatsApp -->
+      <a href="https://wa.me/254700000000?text=Hello%20Arti%27stico%2C%20I%20would%20love%20to%20enquire%20about%20your%20interior%20design%20services." target="_blank" rel="noopener noreferrer" class="link-btn btn-whatsapp btn-whatsapp-cta" id="whatsapp-link">
+        <div class="btn-icon">
+          <svg viewBox="0 0 24 24">
+            <path fill="#25D366" d="M17.47 6.53A8.37 8.37 0 0012 4.5a8.5 8.5 0 00-7.37 12.72L4.5 19.5l2.36-.62A8.48 8.48 0 0012 20.5a8.5 8.5 0 008.5-8.5 8.37 8.37 0 00-3.03-5.47z"/>
+            <path fill="white" d="M17.06 15.56c-.25.7-1.24 1.28-1.72 1.36-.44.08-1 .1-1.62-.1a14.88 14.88 0 01-1.47-.54 11.5 11.5 0 01-4-3.54c-.44-.59-.9-1.56-.9-2.56a3 3 0 01.94-2.22.97.97 0 01.7-.32c.2 0 .39 0 .56.01.18.01.43-.07.67.51.25.6.84 2.06.92 2.21.08.15.13.33.03.53-.1.2-.15.32-.3.5-.14.17-.3.38-.43.5-.14.14-.29.29-.12.58.17.28.75 1.24 1.61 2 1.1.98 2.04 1.29 2.32 1.44.28.15.45.12.62-.07.17-.2.72-.84.91-1.13.19-.28.38-.24.64-.14.27.1 1.7.8 2 .95.28.14.47.21.54.33.07.11.07.67-.18 1.38z"/>
+          </svg>
+        </div>
+        <div class="btn-text">
+          <span class="btn-label">WhatsApp</span>
+          <span class="btn-name">Send an Enquiry</span>
+          <span class="btn-handle">We would be delighted to assist</span>
+        </div>
+        <span class="btn-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </span>
+      </a>
+
+    </nav>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-divider">
+        <div class="footer-divider-line"></div>
+        <div class="footer-gem">
+          <span></span><span></span><span></span>
+        </div>
+        <div class="footer-divider-line"></div>
+      </div>
+      <p class="footer-quote">"Crafting spaces of timeless elegance &amp; distinction."</p>
+      <p class="footer-copy">&copy; <span id="yr"></span> Arti'stico Finishes &amp; Interior Design Co. Ltd. All rights reserved.</p>
+    </footer>
+
+  </main>
+
+  <script>
+    // Dynamic year
+    document.getElementById('yr').textContent = new Date().getFullYear();
+
+    // Stagger link button animations
+    const btns = document.querySelectorAll('.link-btn');
+    btns.forEach((btn, i) => {
+      btn.style.opacity = '0';
+      btn.style.animation = `fadeUp 0.6s cubic-bezier(.22,1,.36,1) ${0.42 + i * 0.09}s forwards`;
+    });
+
+    // Subtle parallax on background — shift repeating-gradient on mouse move
+    document.addEventListener('mousemove', (e) => {
+      const x = (e.clientX / window.innerWidth  - 0.5) * 16;
+      const y = (e.clientY / window.innerHeight - 0.5) * 10;
+      document.querySelector('.bg-canvas').style.backgroundPosition = `${x}px ${y}px`;
+    });
+  </script>
+
+</body>
+</html>
