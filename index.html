@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Arti'stico Finishes & Interior Design Company Limited — Where luxury meets craftsmanship. Explore our world of exquisite interiors." />
+  <meta name="description" content="Arti'stico Finishes & Interior Design Company Limited ." />
   <title>ARTI'STICO | Finishes &amp; Interior Design</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -64,17 +64,28 @@
       background: var(--purple-deep);
     }
 
-    /* Depth gradient — blends purple with logo gold warmth */
+    /* Depth gradient — animated aurora orbs */
     .bg-canvas::before {
       content: '';
       position: absolute;
-      inset: 0;
+      inset: -20%;
+      width: 140%; height: 140%;
       background:
-        radial-gradient(ellipse 80% 55% at 15% 0%,   rgba(110,31,180,0.55) 0%, transparent 60%),
-        radial-gradient(ellipse 65% 50% at 85% 100%,  rgba(45,5,90,0.9) 0%, transparent 65%),
-        radial-gradient(ellipse 50% 40% at 70% 20%,  rgba(245,166,35,0.07) 0%, transparent 55%),
-        radial-gradient(ellipse 40% 35% at 30% 80%,  rgba(245,166,35,0.05) 0%, transparent 50%),
+        radial-gradient(ellipse 70% 55% at 15% 0%,   rgba(110,31,180,0.6) 0%, transparent 55%),
+        radial-gradient(ellipse 60% 50% at 85% 100%,  rgba(45,5,90,0.9) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 40% at 70% 20%,  rgba(245,166,35,0.09) 0%, transparent 50%),
+        radial-gradient(ellipse 45% 40% at 25% 75%,  rgba(150,30,220,0.35) 0%, transparent 55%),
+        radial-gradient(ellipse 40% 35% at 60% 85%,  rgba(245,166,35,0.06) 0%, transparent 50%),
         linear-gradient(160deg, #2D0558 0%, #3B0764 45%, #2D0558 100%);
+      animation: auroraShift 18s ease-in-out infinite alternate;
+    }
+
+    @keyframes auroraShift {
+      0%   { transform: translate(0, 0) scale(1); }
+      25%  { transform: translate(-3%, 2%) scale(1.03); }
+      50%  { transform: translate(2%, -3%) scale(1.015); }
+      75%  { transform: translate(-2%, -2%) scale(1.04); }
+      100% { transform: translate(3%, 1%) scale(1.02); }
     }
 
     /* Subtle diagonal pattern — like woven silk ── */
@@ -107,8 +118,32 @@
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
       pointer-events: none;
       z-index: 1;
-      opacity: 0.4;
+      opacity: 0.35;
       mix-blend-mode: screen;
+      animation: grainDrift 25s linear infinite alternate;
+    }
+
+    @keyframes grainDrift {
+      0%   { transform: translate(0, 0); }
+      100% { transform: translate(-4%, -3%); }
+    }
+
+    /* Floating gold accent orb */
+    .bg-orb {
+      position: fixed;
+      width: 340px; height: 340px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(245,166,35,0.07) 0%, transparent 70%);
+      top: 55%; left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 0;
+      pointer-events: none;
+      animation: orbBreath 12s ease-in-out infinite;
+    }
+
+    @keyframes orbBreath {
+      0%, 100% { transform: translate(-50%, -50%) scale(1);   opacity: 0.6; }
+      50%       { transform: translate(-50%, -55%) scale(1.25); opacity: 1; }
     }
 
     /* ── Decorative arch top border ── */
@@ -324,8 +359,8 @@
       font-size: clamp(0.58rem, 2.2vw, 0.68rem);
       letter-spacing: 0.32em;
       text-transform: uppercase;
-      color: var(--gold-light);
-      font-weight: 500;
+      color: var(--gold);
+      font-weight: 600;
       margin-bottom: 10px;
     }
 
@@ -341,34 +376,87 @@
     }
 
     /* ── Meta Pills ── */
-    .meta-pills {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 8px;
-      margin: 18px 0 36px;
-      animation: fadeUp 0.85s cubic-bezier(.22,1,.36,1) 0.32s both;
-    }
-
-    .pill {
+    /* ── Location Badge ── */
+    .location-badge {
       display: inline-flex;
       align-items: center;
-      gap: 7px;
-      padding: 7px 16px;
-      border-radius: 4px;
-      border: 1px solid rgba(245,166,35,0.25);
-      background: rgba(245,166,35,0.07);
-      font-size: 0.68rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--gold-light);
-      font-weight: 500;
-      box-shadow: 0 1px 6px rgba(0,0,0,0.2);
+      gap: 0;
+      border-radius: 18px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(245,166,35,0.3);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow:
+        0 4px 24px rgba(0,0,0,0.35),
+        0 0 0 1px rgba(245,166,35,0.08),
+        0 1px 0 rgba(255,255,255,0.07) inset;
+      animation: fadeUp 0.85s cubic-bezier(.22,1,.36,1) 0.32s both;
+      transition: border-color 0.25s, box-shadow 0.25s;
     }
-    .pill svg {
-      width: 12px; height: 12px;
-      fill: var(--gold);
+    .location-badge:hover {
+      border-color: rgba(245,166,35,0.55);
+      box-shadow:
+        0 8px 32px rgba(0,0,0,0.45),
+        0 0 0 1px rgba(245,166,35,0.18);
+    }
+
+    /* GIF side panel */
+    .location-gif-wrap {
+      position: relative;
+      width: 60px;
+      height: 60px;
       flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(245,166,35,0.06);
+      border-right: 1px solid rgba(245,166,35,0.18);
+    }
+    .location-gif-wrap img {
+      width: 44px;
+      height: 44px;
+      object-fit: contain;
+      border-radius: 4px;
+    }
+    /* subtle pulse ring behind gif */
+    .location-gif-wrap::before {
+      content: '';
+      position: absolute;
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(245,166,35,0.35);
+      animation: locPulse 2.2s ease-out infinite;
+    }
+    @keyframes locPulse {
+      0%   { transform: scale(0.85); opacity: 0.8; }
+      70%  { transform: scale(1.35); opacity: 0; }
+      100% { transform: scale(1.35); opacity: 0; }
+    }
+
+    /* Text side */
+    .location-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      padding: 10px 18px 10px 14px;
+    }
+    .location-label {
+      font-family: 'Jost', sans-serif;
+      font-size: 0.52rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+      line-height: 1;
+    }
+    .location-address {
+      font-family: 'Jost', sans-serif;
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.88);
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
     }
 
     /* ── Section Label ── */
@@ -419,7 +507,7 @@
     }
 
     .link-btn:hover {
-      transform: translateY(-3px) scale(1.012);
+      transform: translateY(-3px);
       background: rgba(255,255,255,0.14);
       border-color: rgba(245,166,35,0.4);
       box-shadow:
@@ -430,7 +518,7 @@
     }
 
     .link-btn:active {
-      transform: translateY(-1px) scale(1.004);
+      transform: translateY(-1px);
       filter: brightness(0.97);
     }
 
@@ -604,18 +692,12 @@
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    /* ── Responsive ── */
-    @media (max-width: 480px) {
-      .page { padding: 52px 16px 20px; }
-      .logo-arch-frame { width: 130px; height: 148px; }
-      .logo-img-container { width: 94px; height: 94px; }
-      .link-btn { padding: 14px 16px; gap: 13px; }
-      .btn-icon { width: 40px; height: 40px; }
-      .btn-icon svg { width: 22px; height: 22px; }
-    }
-
-    @media (max-width: 360px) {
-      .company-name { font-size: 1.75rem; }
+    /* ── Location Wrap ── */
+    .location-wrap {
+      display: flex;
+      justify-content: center;
+      margin: 20px 0 36px;
+      animation: fadeUp 0.85s cubic-bezier(.22,1,.36,1) 0.32s both;
     }
   </style>
 </head>
@@ -627,11 +709,9 @@
   <!-- Textured Background -->
   <div class="bg-canvas"></div>
   <div class="grain"></div>
+  <div class="bg-orb"></div>
 
   <main class="page">
-
-    <!-- Collection tag -->
-    <div class="collection-tag">Est. Interior &amp; Finishes</div>
 
     <!-- Logo -->
     <div class="logo-wrap">
@@ -662,14 +742,21 @@
 
       <p class="tagline">Finishes &amp; Interior Design Company Limited</p>
       <p class="bio">Where refined craftsmanship meets elevated living.<br>We curate spaces of timeless distinction.</p>
+
+     
     </div>
 
-    <!-- Meta Pills -->
-    <div class="meta-pills">
-      <span class="pill">
-        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-        Shem Plaza, Off Lusaka Road, 1st Floor
-      </span>
+    <!-- Location -->
+    <div class="location-wrap">
+      <a href="https://maps.google.com/?q=Shem+Plaza+Off+Lusaka+Road+Nairobi" target="_blank" rel="noopener noreferrer" class="location-badge">
+        <div class="location-gif-wrap">
+          <img src="location.gif" alt="Location pin" />
+        </div>
+        <div class="location-text">
+          <span class="location-label">Our Location</span>
+          <span class="location-address">Shem Plaza, Off Lusaka Road, 1st Floor</span>
+        </div>
+      </a>
     </div>
 
     <!-- Social Links -->
@@ -680,11 +767,9 @@
       <!-- LinkedIn -->
       <a href="https://www.linkedin.com/in/artistico-designs-8103103ab" target="_blank" rel="noopener noreferrer" class="link-btn btn-linkedin" id="linkedin-link">
         <div class="btn-icon">
-          <svg viewBox="0 0 24 24" fill="none">
-            <rect width="24" height="24" rx="4" fill="#0077B5"/>
-            <path d="M7.5 9.5H5V19H7.5V9.5Z" fill="white"/>
-            <circle cx="6.25" cy="6.75" r="1.5" fill="white"/>
-            <path d="M19 19H16.5V14.25C16.5 13.15 15.6 12.25 14.5 12.25C13.4 12.25 12.5 13.15 12.5 14.25V19H10V9.5H12.5V10.87C13.15 9.91 14.23 9.25 15.5 9.25C17.43 9.25 19 10.82 19 12.75V19Z" fill="white"/>
+          <!-- LinkedIn white icon -->
+          <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.28 8.5H4.7V24H.28V8.5zM8.5 8.5h4.21v2.13h.06C13.4 9.05 15.03 8 17.02 8c4.5 0 5.33 2.96 5.33 6.8V24h-4.42v-8.28c0-1.97-.04-4.52-2.75-4.52-2.76 0-3.18 2.15-3.18 4.37V24H8.5V8.5z"/>
           </svg>
         </div>
         <div class="btn-text">
@@ -702,9 +787,9 @@
       <!-- TikTok -->
       <a href="https://www.tiktok.com/@artisticofinishes" target="_blank" rel="noopener noreferrer" class="link-btn btn-tiktok" id="tiktok-link">
         <div class="btn-icon">
-          <svg viewBox="0 0 24 24">
-            <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.53V6.76a4.85 4.85 0 01-1.01-.07z" fill="white"/>
-            <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.53V6.76a4.85 4.85 0 01-1.01-.07z" fill="#69C9D0" opacity="0.6"/>
+          <!-- TikTok white icon -->
+          <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19.321 5.562a5.122 5.122 0 0 1-.443-.258 6.228 6.228 0 0 1-1.138-.965c-.849-.96-1.166-1.937-1.285-2.616h.004C16.368 1.27 16.418 1 16.42 1h-3.757v14.4a2.45 2.45 0 0 1-2.445 2.137 2.45 2.45 0 0 1-2.449-2.449 2.45 2.45 0 0 1 2.449-2.449c.24 0 .47.035.689.098V9.01a6.266 6.266 0 0 0-.689-.038 6.218 6.218 0 0 0-6.218 6.217 6.218 6.218 0 0 0 6.218 6.218 6.218 6.218 0 0 0 6.217-6.218V8.674a9.46 9.46 0 0 0 5.532 1.77V6.719a5.454 5.454 0 0 1-2.646-1.157z"/>
           </svg>
         </div>
         <div class="btn-text">
@@ -722,9 +807,9 @@
       <!-- YouTube -->
       <a href="https://youtube.com/@artisticodesigns" target="_blank" rel="noopener noreferrer" class="link-btn btn-youtube" id="youtube-link">
         <div class="btn-icon">
-          <svg viewBox="0 0 24 24">
-            <path d="M23.5 6.2a3.02 3.02 0 00-2.12-2.14C19.56 3.6 12 3.6 12 3.6s-7.56 0-9.38.46A3.02 3.02 0 00.5 6.2C.04 8.04.04 12 .04 12s0 3.96.46 5.8a3.02 3.02 0 002.12 2.14C4.44 20.4 12 20.4 12 20.4s7.56 0 9.38-.46a3.02 3.02 0 002.12-2.14C23.96 15.96 23.96 12 23.96 12s-.04-3.96-.46-5.8z" fill="#FF0000"/>
-            <path d="M9.75 15.5l6.25-3.5-6.25-3.5v7z" fill="white"/>
+          <!-- YouTube white play icon -->
+          <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+            <path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/>
           </svg>
         </div>
         <div class="btn-text">
@@ -742,19 +827,11 @@
       <!-- Instagram -->
       <a href="https://www.instagram.com/artisticofinishes" target="_blank" rel="noopener noreferrer" class="link-btn btn-instagram" id="instagram-link">
         <div class="btn-icon">
-          <svg viewBox="0 0 24 24">
-            <defs>
-              <radialGradient id="ig-gradient" cx="30%" cy="107%" r="150%">
-                <stop offset="0%"   stop-color="#fdf497"/>
-                <stop offset="5%"   stop-color="#fdf497"/>
-                <stop offset="45%"  stop-color="#fd5949"/>
-                <stop offset="60%"  stop-color="#d6249f"/>
-                <stop offset="90%"  stop-color="#285AEB"/>
-              </radialGradient>
-            </defs>
-            <rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="url(#ig-gradient)"/>
-            <circle cx="12" cy="12" r="4.5" fill="none" stroke="white" stroke-width="1.8"/>
-            <circle cx="17.5" cy="6.5" r="1.2" fill="white"/>
+          <!-- Instagram white icon -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+            <circle cx="12" cy="12" r="5"/>
+            <circle cx="17.5" cy="6.5" r="1.5" fill="white" stroke="none"/>
           </svg>
         </div>
         <div class="btn-text">
@@ -772,9 +849,9 @@
       <!-- WhatsApp -->
       <a href="https://wa.me/254700000000?text=Hello%20Arti%27stico%2C%20I%20would%20love%20to%20enquire%20about%20your%20interior%20design%20services." target="_blank" rel="noopener noreferrer" class="link-btn btn-whatsapp btn-whatsapp-cta" id="whatsapp-link">
         <div class="btn-icon">
-          <svg viewBox="0 0 24 24">
-            <path fill="#25D366" d="M17.47 6.53A8.37 8.37 0 0012 4.5a8.5 8.5 0 00-7.37 12.72L4.5 19.5l2.36-.62A8.48 8.48 0 0012 20.5a8.5 8.5 0 008.5-8.5 8.37 8.37 0 00-3.03-5.47z"/>
-            <path fill="white" d="M17.06 15.56c-.25.7-1.24 1.28-1.72 1.36-.44.08-1 .1-1.62-.1a14.88 14.88 0 01-1.47-.54 11.5 11.5 0 01-4-3.54c-.44-.59-.9-1.56-.9-2.56a3 3 0 01.94-2.22.97.97 0 01.7-.32c.2 0 .39 0 .56.01.18.01.43-.07.67.51.25.6.84 2.06.92 2.21.08.15.13.33.03.53-.1.2-.15.32-.3.5-.14.17-.3.38-.43.5-.14.14-.29.29-.12.58.17.28.75 1.24 1.61 2 1.1.98 2.04 1.29 2.32 1.44.28.15.45.12.62-.07.17-.2.72-.84.91-1.13.19-.28.38-.24.64-.14.27.1 1.7.8 2 .95.28.14.47.21.54.33.07.11.07.67-.18 1.38z"/>
+          <!-- WhatsApp white icon -->
+          <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.38 1.26 4.8L2.05 22l5.43-1.43a9.83 9.83 0 0 0 4.56 1.12c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm5.48 13.67c-.23.64-1.34 1.22-1.84 1.3-.49.07-1.08.1-1.74-.11a16 16 0 0 1-1.58-.58 12.43 12.43 0 0 1-4.31-3.81c-.47-.63-.97-1.68-.97-2.76a3.22 3.22 0 0 1 1.01-2.4 1.04 1.04 0 0 1 .75-.34c.21 0 .42 0 .6.01.19.01.46-.07.72.55.27.64.9 2.22.99 2.38.08.16.14.35.03.57-.1.21-.16.34-.32.53-.15.18-.32.41-.46.55-.15.15-.31.31-.13.62.18.3.8 1.33 1.73 2.16 1.19 1.06 2.19 1.39 2.49 1.55.3.16.48.13.66-.08.18-.21.77-.9.98-1.22.2-.3.4-.25.68-.15.29.1 1.83.86 2.14 1.02.3.15.51.22.58.35.07.12.07.72-.19 1.41z"/>
           </svg>
         </div>
         <div class="btn-text">
